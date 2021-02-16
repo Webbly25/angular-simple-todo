@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TasksOverviewComponent } from './tasks-overview/tasks-overview.component';
-import { TaskFormComponent } from './task-form/task-form.component';
+import { TaskViewComponent } from './task-view/task-view.component';
 
 const routes: Routes = [
   { path: 'overview', component: TasksOverviewComponent },
-  { path: 'tasks/new', component: TaskFormComponent },
-  { path: 'tasks/:id', component: TaskFormComponent },
+  { path: 'tasks/new', component: TaskViewComponent },
+  { path: 'tasks/:id', component: TaskViewComponent },
   { path: '', redirectTo: 'overview', pathMatch: 'full' }
 ];
 

@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Task } from '../../../types/Task';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-task-list',
@@ -11,7 +12,11 @@ export class TaskListComponent implements OnInit {
   @Input() name = 'Todo Group';
   @Input() tasks: Task[] = [];
 
-  constructor() {}
+  @ViewChild('modal_content') content?: Element;
+  selectedTask: Task = {} as Task;
+  taskModal?: NgbModalRef;
+
+  constructor(private modalService: NgbModal) {}
 
   ngOnInit(): void {}
 
@@ -29,6 +34,35 @@ export class TaskListComponent implements OnInit {
    */
   onItemFinished(id: number): void {
     this.onItemDeleted(id);
+  }
+
+  /**
+   * Handle a task click
+   * Launch a modal containing the edit form for the task
+   * @param id The id of the task that was clicked
+   */
+  onTaskClick(id: number): void {
+    this.selectedTask = this.tasks.find(task => task.id === id) as Task;
+    this.taskModal = this.modalService.open(this.content);
+  }
+
+  /**
+   * Handle the task form submitting
+   * Update the tasks list to include the new value
+   * @param updatedTask The updated task value
+   */
+  onTaskSubmit(updatedTask: Task): void {
+    this.taskModal?.close();
+
+    // get the index of the task to update
+    const taskIndex = this.tasks.findIndex(task => task.id === updatedTask.id);
+    if (taskIndex === null) {
+      // if the task wasn't found add it to the end
+      this.tasks.push(updatedTask);
+    } else {
+      // the task was found so replace the values with the new ones
+      this.tasks[taskIndex] = updatedTask;
+    }
   }
 
 }

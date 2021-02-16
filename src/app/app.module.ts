@@ -15,6 +15,7 @@ import { TaskListComponent } from './task-lists/task-list/task-list.component';
 import { TaskListItemComponent } from './task-lists/task-list-item/task-list-item.component';
 import { TaskFormComponent } from './task-form/task-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { TaskViewComponent } from './task-view/task-view.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     AlertItemComponent,
     TaskListComponent,
     TaskListItemComponent,
-    TaskFormComponent
+    TaskFormComponent,
+    TaskViewComponent
   ],
   imports: [
     BrowserModule,

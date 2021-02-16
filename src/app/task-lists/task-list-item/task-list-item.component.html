@@ -1,15 +1,12 @@
 <li class="list-group-item" *ngIf="task">
-  <span>
+  <span class="item-body" (click)="onClick()">
     {{ task.id }} | {{ task.name }}
     <span *ngIf="task.finishedOn" class="text-muted">
       - {{ task.finishedOn | date:'medium' }}
     </span>
   </span>
   <div class="btn-group">
-    <ng-template *ngIf="!task.finishedOn">
-      <button class="btn btn-success" (click)="onFinish()"><i class="bi bi-check2-circle"></i></button>
-      <a class="btn btn-warning" [routerLink]="['/tasks', task.id]"><i class="bi bi-pencil"></i></a>
-    </ng-template>
+    <button *ngIf="!task.finishedOn" class="btn btn-success" (click)="onFinish()"><i class="bi bi-check2-circle"></i></button>
     <button class="btn btn-danger" (click)="onDelete()"><i class="bi bi-trash"></i></button>
   </div>
 </li>

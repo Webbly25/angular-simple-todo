@@ -10,12 +10,23 @@ import { TaskService } from '../../services/task.service';
 export class TaskListItemComponent implements OnInit {
 
   @Input() task?: Task;
+  @Output() clicked = new EventEmitter();
   @Output() finished = new EventEmitter();
   @Output() deleted = new EventEmitter();
 
   constructor(private taskService: TaskService) {}
 
   ngOnInit(): void {}
+
+  /**
+   * Handle clicks on the main task item
+   * Emit the clicked event for it to be handled elsewhere
+   */
+  onClick(): void {
+    if (!this.task) return;
+
+    this.clicked.emit(this.task.id);
+  }
 
   /**
    * Finish the task using the taskService

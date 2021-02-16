@@ -1,10 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { TaskService } from '../services/task.service';
 import { Task } from '../../types/Task';
 import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { markFormGroupTouched } from '../utils';
-import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-task-form',
@@ -13,53 +11,26 @@ import { Location } from '@angular/common';
 })
 export class TaskFormComponent implements OnInit {
 
-  loaded = false;
+  @Input() editing = false;
+  @Input() editTask = {} as Task;
+  @Output() submitted = new EventEmitter();
 
-  editing = false;
-  taskId: number | null = null;
   taskForm = this.formBuilder.group({
     name: [ '', Validators.required ],
     description: ''
   });
 
   constructor(
-    private route: ActivatedRoute,
     private formBuilder: FormBuilder,
-    private taskService: TaskService,
-    private location: Location
+    private taskService: TaskService
   ) {}
 
-  /**
-   * Call get task to try and load the id
-   * If there is no id then create a new task
-   * Otherwise edit the task
-   */
   ngOnInit(): void {
-    console.log(this.taskForm.get('name'));
-    this.getTask();
-  }
-
-  /**
-   * Attempt to get the task from the URL
-   * If making a new task then set editing to false
-   */
-  getTask(): void {
-    const id = this.route.snapshot.paramMap.get('id');
-
-    if (id === null) {
-      this.loaded = true;
-      return;
+    // if we are editing the form, pre-validate it
+    if (this.editing) {
+      this.taskForm.patchValue(this.editTask);
+      markFormGroupTouched(this.taskForm);
     }
-
-    this.editing = true;
-    this.taskService.getTaskById(+id)
-      .subscribe(task => {
-        this.loaded = true;
-
-        this.taskId = +id;
-        this.taskForm.patchValue(task);
-        markFormGroupTouched(this.taskForm);
-      });
   }
 
   /**
@@ -72,19 +43,18 @@ export class TaskFormComponent implements OnInit {
       task.description = undefined;
     }
 
-    let fn;
+    this.taskForm.reset();
 
-    if (this.taskId) {
+    if (this.editing) {
       // are we editing a task
-      task.id = this.taskId;
-      fn = this.taskService.updateTask(task);
+      task.id = this.editTask.id;
+      this.taskService.updateTask(task)
+        .subscribe(_ => this.submitted.emit(task));
     } else {
       // we are making a new task
-      fn = this.taskService.addTask(task);
+      this.taskService.addTask(task)
+        .subscribe(newTask => this.submitted.emit(newTask));
     }
-
-    // once the service is done go back to the overview page
-    fn.subscribe(_ => this.location.back());
   }
 
   //

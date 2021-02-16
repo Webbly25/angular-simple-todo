@@ -1,0 +1,5 @@
+<div *ngIf="loaded">
+  <p class="lead">{{ editingTask ? 'Edit Task id=' + task.id : 'New Task' }}</p>
+
+  <app-task-form [editTask]="task" [editing]="editingTask"></app-task-form>
+</div>

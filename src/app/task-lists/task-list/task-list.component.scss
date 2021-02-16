@@ -1,0 +1,13 @@
+.view-section {
+
+  &:last-child {
+    p {
+      margin-bottom: 0;
+    }
+  }
+
+  .view-section-label {
+    font-weight: bold;
+    text-align: right;
+  }
+}
