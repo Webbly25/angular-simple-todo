@@ -6,8 +6,10 @@
     </span>
   </span>
   <div class="btn-group">
-    <button class="btn btn-success"><i class="bi bi-check2-circle"></i></button>
-    <a *ngIf="!task.finishedOn" class="btn btn-warning" [routerLink]="['/tasks', task.id]"><i class="bi bi-pencil"></i></a>
+    <ng-template *ngIf="!task.finishedOn">
+      <button class="btn btn-success" (click)="onFinish()"><i class="bi bi-check2-circle"></i></button>
+      <a class="btn btn-warning" [routerLink]="['/tasks', task.id]"><i class="bi bi-pencil"></i></a>
+    </ng-template>
     <button class="btn btn-danger" (click)="onDelete()"><i class="bi bi-trash"></i></button>
   </div>
 </li>
