@@ -1,0 +1,3 @@
+<div *ngIf="alertService.alerts.length">
+  <app-alert-item *ngFor="let alert of alertService.alerts" [alert]="alert"></app-alert-item>
+</div>

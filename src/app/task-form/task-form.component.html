@@ -1,0 +1,19 @@
+<div *ngIf="loaded">
+  <p class="lead">{{ editing ? 'Edit Task id=' + taskId : 'New Task' }}</p>
+
+  <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+    <div class="form-group req">
+      <label for="name">Task Name</label>
+      <input id="name" type="text" class="form-control" formControlName="name" placeholder="Task Name" required>
+      <div class="invalid-feedback">A task name is required.</div>
+    </div>
+
+    <div class="form-group">
+      <label for="description">Description:</label>
+      <textarea id="description" class="form-control" formControlName="description"
+                placeholder="Description"></textarea>
+    </div>
+
+    <button class="btn btn-primary float-right" [disabled]="!taskForm.valid" type="submit">Save</button>
+  </form>
+</div>

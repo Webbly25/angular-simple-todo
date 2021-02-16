@@ -1,0 +1,9 @@
+<ngb-alert *ngIf="alert" class="alert-dismissible"
+           [type]="alert.type" [dismissible]="pinned"
+           (closed)="onClose()"
+>
+  {{ alert.message }}
+  <button *ngIf="!pinned" type="button" class="close" (click)="pinned = true">
+    <i class="bi bi-pin"></i>
+  </button>
+</ngb-alert>

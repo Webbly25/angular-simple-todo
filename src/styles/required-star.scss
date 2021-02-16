@@ -1,0 +1,12 @@
+@mixin required-star {
+  content: ' *';
+  color: red;
+}
+
+.req > label:after {
+  @include required-star;
+}
+
+.req-star:after {
+  @include required-star;
+}

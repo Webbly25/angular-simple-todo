@@ -1,0 +1,12 @@
+<div class="card">
+  <div class="card-header">{{ name }}</div>
+  <ul class="list-group list-group-flush" *ngIf="tasks.length > 0; else noTasks">
+    <app-task-list-item *ngFor="let task of tasks" [task]="task"
+                        (deleted)="onItemDeleted($event)" (finished)="onItemFinished($event)"></app-task-list-item>
+  </ul>
+  <ng-template #noTasks>
+    <div class="card-body">
+      <p class="card-text text-center text-muted">-- no tasks --</p>
+    </div>
+  </ng-template>
+</div>
