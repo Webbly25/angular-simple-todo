@@ -1,3 +1,23 @@
-<app-task-list name="Current Tasks" [tasks]="tasks"></app-task-list>
+<ul ngbNav #nav="ngbNav" class="nav-tabs">
+  <li ngbNavItem>
+    <a ngbNavLink>Unfinished Tasks</a>
+    <ng-template ngbNavContent>
+      <app-task-list name="Unfinished Tasks" [tasks]="unfinishedTasks"></app-task-list>
+    </ng-template>
+  </li>
+  <li ngbNavItem>
+    <a ngbNavLink>Finished Tasks</a>
+    <ng-template ngbNavContent>
+      <app-task-list name="Finished Tasks" [tasks]="finishedTasks"></app-task-list>
+    </ng-template>
+  </li>
+  <li ngbNavItem>
+    <a ngbNavLink>All Tasks</a>
+    <ng-template ngbNavContent>
+      <app-task-list name="All Tasks" [tasks]="allTasks"></app-task-list>
+    </ng-template>
+  </li>
+</ul>
+<div [ngbNavOutlet]="nav" class="mt-2"></div>
 
-<a class="btn btn-primary mt-2 float-right" routerLink="/tasks/new">New Task</a>
+<a class="btn btn-primary mt-2 float-right" routerLink="/unfinishedTasks/new">New Task</a>

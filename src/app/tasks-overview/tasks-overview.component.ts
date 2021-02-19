@@ -9,7 +9,9 @@ import { TaskService } from '../services/task.service';
 })
 export class TasksOverviewComponent implements OnInit {
 
-  tasks: Task[] = [];
+  unfinishedTasks: Task[] = [];
+  finishedTasks: Task[] = [];
+  allTasks: Task[] = [];
 
   constructor(private taskService: TaskService) {}
 
@@ -18,7 +20,13 @@ export class TasksOverviewComponent implements OnInit {
    */
   ngOnInit(): void {
     this.taskService.getUnfinishedTasks()
-      .subscribe(tasks => this.tasks = tasks);
+      .subscribe(tasks => this.unfinishedTasks = tasks);
+
+    this.taskService.getFinishedTasks()
+      .subscribe(tasks => this.finishedTasks = tasks);
+
+    this.taskService.getAllTasks()
+      .subscribe(tasks => this.allTasks = tasks);
   }
 
 }
