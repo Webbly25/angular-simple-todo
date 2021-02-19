@@ -1,5 +1,4 @@
 <div class="card">
-  <div class="card-header">{{ name }}</div>
   <ul class="list-group list-group-flush" *ngIf="tasks.length > 0; else noTasks">
     <app-task-list-item *ngFor="let task of tasks" [task]="task" (clicked)="onTaskClick($event)"
                         (deleted)="onItemDeleted($event)" (finished)="onItemFinished($event)"></app-task-list-item>

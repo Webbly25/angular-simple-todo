@@ -2,19 +2,19 @@
   <li ngbNavItem>
     <a ngbNavLink>Unfinished Tasks</a>
     <ng-template ngbNavContent>
-      <app-task-list name="Unfinished Tasks" [tasks]="unfinishedTasks"></app-task-list>
+      <app-task-list [tasks]="unfinishedTasks"></app-task-list>
     </ng-template>
   </li>
   <li ngbNavItem>
     <a ngbNavLink>Finished Tasks</a>
     <ng-template ngbNavContent>
-      <app-task-list name="Finished Tasks" [tasks]="finishedTasks"></app-task-list>
+      <app-task-list [tasks]="finishedTasks"></app-task-list>
     </ng-template>
   </li>
   <li ngbNavItem>
     <a ngbNavLink>All Tasks</a>
     <ng-template ngbNavContent>
-      <app-task-list name="All Tasks" [tasks]="allTasks"></app-task-list>
+      <app-task-list [tasks]="allTasks"></app-task-list>
     </ng-template>
   </li>
 </ul>

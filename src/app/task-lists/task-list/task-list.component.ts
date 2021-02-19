@@ -9,7 +9,6 @@ import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 })
 export class TaskListComponent implements OnInit {
 
-  @Input() name = 'Todo Group';
   @Input() tasks: Task[] = [];
 
   @ViewChild('modal_content') content?: Element;
