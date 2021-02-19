@@ -10,9 +10,9 @@ This project is intended to help others learn best practises for developing with
 
 ## Todo
 
-* Different views of tasks
-  * All tasks
-  * Completed tasks
+* Separate task views into different pages
+  * Nested links?
+  * Don't want to show view nav on new task page
 * Login system
 * Only logged-in users can edit tasks
   * All users can view tasks
