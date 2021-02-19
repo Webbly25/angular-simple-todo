@@ -11,9 +11,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class TaskService {
 
   private tasksUrl = 'api/tasks'; // URL to web api
-  httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-  };
+  httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
 
   constructor(
     private http: HttpClient,
